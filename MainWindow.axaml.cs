@@ -12,6 +12,7 @@ public partial class MainWindow : Window
         ContentArea.Content = new HomePage();
     }
 
+    // Кожен клік створює нову сторінку — так дані завжди свіжі
     private void OnHomeClick(object? sender, RoutedEventArgs e)
     {
         ContentArea.Content = new HomePage();

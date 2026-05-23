@@ -1,11 +1,88 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="TouchTypingTutor.Views.TypingPage">
+             xmlns:models="using:TouchTypingTutor.Models"
+             x:Class="TouchTypingTutor.Views.TypingPage"
+             Focusable="True"
+             KeyDown="OnKeyDown">
 
-  <StackPanel Margin="10">
-    <TextBlock Text="Тренування" FontSize="28" FontWeight="Bold"/>
-    <TextBlock Text="Тут буде сам процес тренування друку."
-               Margin="0,15,0,0" FontSize="14" Foreground="Gray"/>
-  </StackPanel>
+  <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+
+    <!-- Заголовок -->
+    <TextBlock Grid.Row="0"
+               Text="Тренування" FontSize="28" FontWeight="Bold"
+               Margin="10,0,0,10"/>
+
+    <!-- Вибір уроку -->
+    <StackPanel Grid.Row="1"
+                Orientation="Horizontal" Spacing="10"
+                Margin="10,0,0,15">
+      <TextBlock Text="Оберіть урок:" VerticalAlignment="Center"/>
+      <ComboBox x:Name="LessonPicker" Width="280"
+                SelectionChanged="OnLessonPicked">
+        <ComboBox.ItemTemplate>
+          <DataTemplate DataType="models:Lesson">
+            <TextBlock Text="{Binding Title}"/>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+    </StackPanel>
+
+    <!-- Статистика поточного тренування -->
+    <Border Grid.Row="2"
+            BorderBrush="#E0E0E8" BorderThickness="1"
+            CornerRadius="6" Padding="15"
+            Margin="10,0,10,15">
+      <Grid ColumnDefinitions="*,*,*">
+        <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+          <TextBlock Text="Час" FontSize="12" Foreground="Gray"
+                     HorizontalAlignment="Center"/>
+          <TextBlock x:Name="TimeLabel" Text="0 с"
+                     FontSize="22" FontWeight="Bold"
+                     HorizontalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+          <TextBlock Text="Швидкість (WPM)" FontSize="12" Foreground="Gray"
+                     HorizontalAlignment="Center"/>
+          <TextBlock x:Name="WpmLabel" Text="0"
+                     FontSize="22" FontWeight="Bold"
+                     HorizontalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+          <TextBlock Text="Точність" FontSize="12" Foreground="Gray"
+                     HorizontalAlignment="Center"/>
+          <TextBlock x:Name="AccuracyLabel" Text="100%"
+                     FontSize="22" FontWeight="Bold"
+                     HorizontalAlignment="Center"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- Текст для друку -->
+    <Border Grid.Row="3"
+            BorderBrush="#E0E0E8" BorderThickness="1"
+            CornerRadius="6" Padding="20"
+            Margin="10,0,10,15">
+      <ScrollViewer>
+        <TextBlock x:Name="TextDisplay"
+                   FontFamily="Menlo,Consolas,monospace"
+                   FontSize="20"
+                   TextWrapping="Wrap"
+                   LineHeight="32"/>
+      </ScrollViewer>
+    </Border>
+
+    <!-- Підказка і кнопка -->
+    <StackPanel Grid.Row="4" Margin="10,0,10,10" Spacing="8">
+      <TextBlock x:Name="HintText"
+                 Text="Оберіть урок і просто почніть друкувати на клавіатурі"
+                 Foreground="Gray" FontSize="13"/>
+      <TextBlock x:Name="StatusText" Foreground="#5B6CFF" FontWeight="SemiBold"/>
+      <Button x:Name="RestartButton" Content="Почати заново"
+              Click="OnRestartClick"
+              HorizontalAlignment="Left"
+              Padding="20,8"/>
+    </StackPanel>
+
+  </Grid>
 
 </UserControl>

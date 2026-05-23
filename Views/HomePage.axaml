@@ -1,13 +1,92 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:models="using:TouchTypingTutor.Models"
              x:Class="TouchTypingTutor.Views.HomePage">
 
-  <StackPanel Margin="10">
-    <TextBlock Text="Головна" FontSize="28" FontWeight="Bold"/>
-    <TextBlock Text="Ласкаво просимо до Touch Typing Tutor!"
-               Margin="0,15,0,0" FontSize="16"/>
-    <TextBlock Text="Тут буде відображатися статистика та графік прогресу."
-               Margin="0,5,0,0" FontSize="14" Foreground="Gray"/>
-  </StackPanel>
+  <ScrollViewer>
+    <StackPanel Margin="10" Spacing="20">
+
+      <!-- Привітання -->
+      <TextBlock Text="Головна" FontSize="28" FontWeight="Bold"/>
+      <TextBlock Text="Ласкаво просимо до Touch Typing Tutor!"
+                 FontSize="16" Foreground="Gray"/>
+
+      <!-- Загальна статистика -->
+      <Border BorderBrush="#E0E0E8" BorderThickness="1"
+              CornerRadius="6" Padding="15">
+        <Grid ColumnDefinitions="*,*,*">
+          <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+            <TextBlock Text="Тренувань" FontSize="12" Foreground="Gray"
+                       HorizontalAlignment="Center"/>
+            <TextBlock x:Name="TotalLabel" Text="0"
+                       FontSize="26" FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+          </StackPanel>
+          <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+            <TextBlock Text="Середня швидкість (WPM)" FontSize="12" Foreground="Gray"
+                       HorizontalAlignment="Center"/>
+            <TextBlock x:Name="AvgWpmLabel" Text="—"
+                       FontSize="26" FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+          </StackPanel>
+          <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+            <TextBlock Text="Середня точність" FontSize="12" Foreground="Gray"
+                       HorizontalAlignment="Center"/>
+            <TextBlock x:Name="AvgAccLabel" Text="—"
+                       FontSize="26" FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- Графік прогресу -->
+      <TextBlock Text="Прогрес за останні 10 тренувань (WPM)"
+                 FontSize="16" FontWeight="SemiBold"/>
+      <Border BorderBrush="#E0E0E8" BorderThickness="1"
+              CornerRadius="6" Padding="15"
+              Height="220">
+        <Canvas x:Name="ChartCanvas" Background="Transparent"/>
+      </Border>
+
+      <!-- Останні результати -->
+      <TextBlock Text="Останні результати"
+                 FontSize="16" FontWeight="SemiBold"/>
+      <Border BorderBrush="#E0E0E8" BorderThickness="1"
+              CornerRadius="6" Padding="10">
+        <ItemsControl x:Name="RecentList">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="models:ResultRow">
+              <Grid ColumnDefinitions="*,Auto,Auto,Auto" Margin="5">
+                <TextBlock Grid.Column="0"
+                           Text="{Binding LessonTitle}"
+                           VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1"
+                           Text="{Binding DateText}"
+                           Margin="10,0"
+                           Foreground="Gray"
+                           VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="2"
+                           Text="{Binding WpmText}"
+                           Margin="10,0"
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="3"
+                           Text="{Binding AccText}"
+                           Margin="10,0"
+                           Foreground="#5B6CFF"
+                           VerticalAlignment="Center"/>
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </Border>
+
+      <TextBlock x:Name="EmptyText"
+                 Text="Поки що немає тренувань. Перейдіть на вкладку «Тренування» і почніть!"
+                 Foreground="Gray" FontStyle="Italic"
+                 IsVisible="False"/>
+
+    </StackPanel>
+  </ScrollViewer>
 
 </UserControl>
