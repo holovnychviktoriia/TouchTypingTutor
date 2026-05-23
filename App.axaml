@@ -1,7 +1,6 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="TouchTypingTutor.App"
-             RequestedThemeVariant="Light">
+             x:Class="TouchTypingTutor.App">
 
     <Application.Styles>
         <FluentTheme />

@@ -7,16 +7,15 @@
 
   <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
 
-    <!-- Заголовок -->
-    <TextBlock Grid.Row="0"
-               Text="Тренування" FontSize="28" FontWeight="Bold"
+    <TextBlock x:Name="TitleText" Grid.Row="0"
+               FontSize="28" FontWeight="Bold"
                Margin="10,0,0,10"/>
 
     <!-- Вибір уроку -->
     <StackPanel Grid.Row="1"
                 Orientation="Horizontal" Spacing="10"
                 Margin="10,0,0,15">
-      <TextBlock Text="Оберіть урок:" VerticalAlignment="Center"/>
+      <TextBlock x:Name="PickLabel" VerticalAlignment="Center"/>
       <ComboBox x:Name="LessonPicker" Width="280"
                 SelectionChanged="OnLessonPicked">
         <ComboBox.ItemTemplate>
@@ -34,21 +33,21 @@
             Margin="10,0,10,15">
       <Grid ColumnDefinitions="*,*,*">
         <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-          <TextBlock Text="Час" FontSize="12" Foreground="Gray"
+          <TextBlock x:Name="TimeCaption" FontSize="12" Foreground="Gray"
                      HorizontalAlignment="Center"/>
           <TextBlock x:Name="TimeLabel" Text="0 с"
                      FontSize="22" FontWeight="Bold"
                      HorizontalAlignment="Center"/>
         </StackPanel>
         <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-          <TextBlock Text="Швидкість (WPM)" FontSize="12" Foreground="Gray"
+          <TextBlock x:Name="WpmCaption" FontSize="12" Foreground="Gray"
                      HorizontalAlignment="Center"/>
           <TextBlock x:Name="WpmLabel" Text="0"
                      FontSize="22" FontWeight="Bold"
                      HorizontalAlignment="Center"/>
         </StackPanel>
         <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-          <TextBlock Text="Точність" FontSize="12" Foreground="Gray"
+          <TextBlock x:Name="AccuracyCaption" FontSize="12" Foreground="Gray"
                      HorizontalAlignment="Center"/>
           <TextBlock x:Name="AccuracyLabel" Text="100%"
                      FontSize="22" FontWeight="Bold"
@@ -71,13 +70,10 @@
       </ScrollViewer>
     </Border>
 
-    <!-- Підказка і кнопка -->
     <StackPanel Grid.Row="4" Margin="10,0,10,10" Spacing="8">
-      <TextBlock x:Name="HintText"
-                 Text="Оберіть урок і просто почніть друкувати на клавіатурі"
-                 Foreground="Gray" FontSize="13"/>
+      <TextBlock x:Name="HintText" Foreground="Gray" FontSize="13"/>
       <TextBlock x:Name="StatusText" Foreground="#5B6CFF" FontWeight="SemiBold"/>
-      <Button x:Name="RestartButton" Content="Почати заново"
+      <Button x:Name="RestartButton"
               Click="OnRestartClick"
               HorizontalAlignment="Left"
               Padding="20,8"/>

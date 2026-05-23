@@ -2,12 +2,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Styles.Resources>
-        <SolidColorBrush x:Key="SidebarBrush" Color="#F4F4F8"/>
-        <SolidColorBrush x:Key="AccentBrush" Color="#5B6CFF"/>
-        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#1A1A2E"/>
-        <SolidColorBrush x:Key="TextMutedBrush" Color="#7A7A8C"/>
+        <ResourceDictionary>
+            <!-- Кольори, які підлаштовуються під тему -->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="SidebarBrush" Color="#F4F4F8"/>
+                    <SolidColorBrush x:Key="AccentBrush" Color="#5B6CFF"/>
+                    <SolidColorBrush x:Key="HoverBrush" Color="#E4E4EE"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="SidebarBrush" Color="#252535"/>
+                    <SolidColorBrush x:Key="AccentBrush" Color="#7B8CFF"/>
+                    <SolidColorBrush x:Key="HoverBrush" Color="#35354A"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
     </Styles.Resources>
 
+    <!-- Стиль кнопок навігації -->
     <Style Selector="Button.nav">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -20,7 +32,7 @@
     </Style>
 
     <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="#E4E4EE"/>
+        <Setter Property="Background" Value="{DynamicResource HoverBrush}"/>
     </Style>
 
 </Styles>

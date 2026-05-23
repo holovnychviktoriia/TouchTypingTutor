@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using TouchTypingTutor.Services;
 using TouchTypingTutor.Views;
 
 namespace TouchTypingTutor;
@@ -9,10 +10,21 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+
+        ApplyTexts();
+        Localization.LanguageChanged += ApplyTexts;
+
         ContentArea.Content = new HomePage();
     }
 
-    // Кожен клік створює нову сторінку — так дані завжди свіжі
+    private void ApplyTexts()
+    {
+        HomeButton.Content = Localization.T("nav.home");
+        LessonsButton.Content = Localization.T("nav.lessons");
+        TypingButton.Content = Localization.T("nav.typing");
+        SettingsButton.Content = Localization.T("nav.settings");
+    }
+
     private void OnHomeClick(object? sender, RoutedEventArgs e)
     {
         ContentArea.Content = new HomePage();

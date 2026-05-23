@@ -2,10 +2,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="TouchTypingTutor.Views.SettingsPage">
 
-  <StackPanel Margin="10">
-    <TextBlock Text="Налаштування" FontSize="28" FontWeight="Bold"/>
-    <TextBlock Text="Тут будуть налаштування мови та теми."
-               Margin="0,15,0,0" FontSize="14" Foreground="Gray"/>
+  <StackPanel Margin="10" Spacing="20">
+
+    <TextBlock x:Name="TitleText"
+               FontSize="28" FontWeight="Bold"/>
+
+    <!-- Мова -->
+    <StackPanel Spacing="8">
+      <TextBlock x:Name="LanguageLabel" FontWeight="SemiBold"/>
+      <ComboBox x:Name="LanguageBox" Width="200"
+                SelectionChanged="OnLanguageChanged">
+        <ComboBoxItem Content="Українська" Tag="uk"/>
+        <ComboBoxItem Content="English" Tag="en"/>
+      </ComboBox>
+    </StackPanel>
+
+    <!-- Тема -->
+    <StackPanel Spacing="8">
+      <TextBlock x:Name="ThemeLabel" FontWeight="SemiBold"/>
+      <ComboBox x:Name="ThemeBox" Width="200"
+                SelectionChanged="OnThemeChanged">
+        <ComboBoxItem x:Name="LightItem" Tag="Light"/>
+        <ComboBoxItem x:Name="DarkItem" Tag="Dark"/>
+      </ComboBox>
+    </StackPanel>
+
   </StackPanel>
 
 </UserControl>

@@ -5,9 +5,8 @@
 
   <Grid RowDefinitions="Auto,*" ColumnDefinitions="280,*">
 
-    <!-- Заголовок -->
-    <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
-               Text="Уроки" FontSize="28" FontWeight="Bold"
+    <TextBlock x:Name="TitleText" Grid.Row="0" Grid.ColumnSpan="2"
+               FontSize="28" FontWeight="Bold"
                Margin="10,0,0,20"/>
 
     <!-- Ліва частина: список уроків -->
@@ -29,7 +28,7 @@
           </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Grid.Row="1" Content="+ Додати урок"
+        <Button x:Name="AddButton" Grid.Row="1"
                 Margin="0,10,0,0"
                 HorizontalAlignment="Stretch"
                 HorizontalContentAlignment="Center"
@@ -42,31 +41,29 @@
     <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="15,0,0,0">
       <StackPanel x:Name="EditPanel" Spacing="10">
 
-        <TextBlock Text="Назва" FontWeight="SemiBold"/>
-        <TextBox x:Name="TitleBox"
-                 PlaceholderText="Наприклад: Тренування цифр"/>
+        <TextBlock x:Name="NameLabel" FontWeight="SemiBold"/>
+        <TextBox x:Name="TitleBox"/>
 
-        <TextBlock Text="Складність" FontWeight="SemiBold" Margin="0,10,0,0"/>
+        <TextBlock x:Name="DifficultyLabel" FontWeight="SemiBold" Margin="0,10,0,0"/>
         <ComboBox x:Name="DifficultyBox" HorizontalAlignment="Stretch">
           <ComboBoxItem Content="Легкий"/>
           <ComboBoxItem Content="Середній"/>
           <ComboBoxItem Content="Складний"/>
         </ComboBox>
 
-        <TextBlock Text="Текст для тренування" FontWeight="SemiBold" Margin="0,10,0,0"/>
+        <TextBlock x:Name="TextLabel" FontWeight="SemiBold" Margin="0,10,0,0"/>
         <TextBox x:Name="TextBox"
-                 PlaceholderText="Введіть текст, який треба буде набирати"
                  AcceptsReturn="True" TextWrapping="Wrap"
                  MinHeight="120"/>
 
         <TextBlock x:Name="ErrorText" Foreground="#D33B3B" Margin="0,5,0,0"/>
 
         <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,15,0,0">
-          <Button Content="Зберегти" Click="OnSaveClick"
-                  Background="{StaticResource AccentBrush}"
+          <Button x:Name="SaveButton" Click="OnSaveClick"
+                  Background="{DynamicResource AccentBrush}"
                   Foreground="White"
                   Padding="20,8"/>
-          <Button x:Name="DeleteButton" Content="Видалити"
+          <Button x:Name="DeleteButton"
                   Click="OnDeleteClick"
                   Padding="20,8"
                   IsEnabled="False"/>

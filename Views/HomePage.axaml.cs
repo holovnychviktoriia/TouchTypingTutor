@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
@@ -17,10 +16,25 @@ public partial class HomePage : UserControl
     public HomePage()
     {
         InitializeComponent();
-        LoadStats();
 
-        // Перемальовуємо графік коли Canvas отримує реальний розмір
+        ApplyTexts();
+        Localization.LanguageChanged += ApplyTexts;
+        DetachedFromVisualTree += (_, _) => Localization.LanguageChanged -= ApplyTexts;
+
+        LoadStats();
         ChartCanvas.SizeChanged += (_, _) => DrawChart();
+    }
+
+    private void ApplyTexts()
+    {
+        TitleText.Text = Localization.T("home.title");
+        WelcomeText.Text = Localization.T("home.welcome");
+        TotalCaption.Text = Localization.T("home.total");
+        AvgWpmCaption.Text = Localization.T("home.avgWpm");
+        AvgAccCaption.Text = Localization.T("home.avgAcc");
+        ChartTitleText.Text = Localization.T("home.chartTitle");
+        RecentTitleText.Text = Localization.T("home.recent");
+        EmptyText.Text = Localization.T("home.empty");
     }
 
     private void LoadStats()
@@ -64,7 +78,7 @@ public partial class HomePage : UserControl
         var last10 = data.Results
             .OrderByDescending(r => r.Date)
             .Take(10)
-            .Reverse()    // щоб старіші були зліва
+            .Reverse()
             .Select(r => r.Wpm)
             .ToList();
 
@@ -78,7 +92,7 @@ public partial class HomePage : UserControl
         double chartW = w - padding * 2;
         double chartH = h - padding * 2;
 
-        int maxWpm = Math.Max(last10.Max(), 30); // мінімум 30 щоб шкала не була нульовою
+        int maxWpm = Math.Max(last10.Max(), 30);
 
         // Горизонтальна вісь — нижня лінія
         var axis = new Line

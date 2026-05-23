@@ -34,6 +34,10 @@ public partial class TypingPage : UserControl
     {
         InitializeComponent();
 
+        ApplyTexts();
+        Localization.LanguageChanged += ApplyTexts;
+        DetachedFromVisualTree += (_, _) => Localization.LanguageChanged -= ApplyTexts;
+
         _appData = _dataService.Load();
         LessonPicker.ItemsSource = new ObservableCollection<Lesson>(_appData.Lessons);
 
@@ -45,6 +49,24 @@ public partial class TypingPage : UserControl
 
         // Щоб контрол ловив клавіатуру одразу після появи
         AttachedToVisualTree += (_, _) => Focus();
+    }
+
+    private void ApplyTexts()
+    {
+        TitleText.Text = Localization.T("typing.title");
+        PickLabel.Text = Localization.T("typing.pick");
+        TimeCaption.Text = Localization.T("typing.time");
+        WpmCaption.Text = Localization.T("typing.wpm");
+        AccuracyCaption.Text = Localization.T("typing.accuracy");
+        RestartButton.Content = Localization.T("typing.restart");
+
+        // Hint оновлюємо в залежності від поточного стану
+        if (_isFinished)
+            HintText.Text = Localization.T("typing.hintDone");
+        else if (_isStarted)
+            HintText.Text = Localization.T("typing.hintDuring");
+        else
+            HintText.Text = Localization.T("typing.hintStart");
     }
 
     private void OnLessonPicked(object? sender, SelectionChangedEventArgs e)
@@ -60,7 +82,7 @@ public partial class TypingPage : UserControl
         _currentLesson = lesson;
         ResetState();
         RenderText();
-        Focus(); // повертаємо фокус після вибору в ComboBox
+        Focus();
     }
 
     private void ResetState()
@@ -75,6 +97,7 @@ public partial class TypingPage : UserControl
         WpmLabel.Text = "0";
         AccuracyLabel.Text = "100%";
         StatusText.Text = string.Empty;
+        HintText.Text = Localization.T("typing.hintStart");
         _timer.Stop();
     }
 
@@ -138,7 +161,7 @@ public partial class TypingPage : UserControl
             _isStarted = true;
             _startTime = DateTime.Now;
             _timer.Start();
-            HintText.Text = "Друкуйте далі. Програма не дасть продовжити, поки не натиснете правильний символ.";
+            HintText.Text = Localization.T("typing.hintDuring");
         }
 
         _totalKeyPresses++;
@@ -255,8 +278,8 @@ public partial class TypingPage : UserControl
         _appData.Results.Add(result);
         _dataService.Save(_appData);
 
-        StatusText.Text = $"✓ Готово! Швидкість: {wpm} WPM, точність: {accuracy:F1}%";
-        HintText.Text = "Натисніть «Почати заново» для повторного тренування.";
+        StatusText.Text = string.Format(Localization.T("typing.done"), wpm, accuracy);
+        HintText.Text = Localization.T("typing.hintDone");
     }
 
     private void OnRestartClick(object? sender, RoutedEventArgs e)

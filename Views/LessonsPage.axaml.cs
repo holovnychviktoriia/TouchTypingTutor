@@ -18,7 +18,10 @@ public partial class LessonsPage : UserControl
     {
         InitializeComponent();
 
-        // Завантажуємо дані з JSON
+        ApplyTexts();
+        Localization.LanguageChanged += ApplyTexts;
+        DetachedFromVisualTree += (_, _) => Localization.LanguageChanged -= ApplyTexts;
+
         _appData = _dataService.Load();
         _lessons = new ObservableCollection<Lesson>(_appData.Lessons);
         LessonsList.ItemsSource = _lessons;
@@ -26,7 +29,19 @@ public partial class LessonsPage : UserControl
         ClearForm();
     }
 
-    // Користувач вибрав урок зі списку
+    private void ApplyTexts()
+    {
+        TitleText.Text = Localization.T("lessons.title");
+        AddButton.Content = Localization.T("lessons.add");
+        NameLabel.Text = Localization.T("lessons.name");
+        TitleBox.Watermark = Localization.T("lessons.namePlaceholder");
+        DifficultyLabel.Text = Localization.T("lessons.difficulty");
+        TextLabel.Text = Localization.T("lessons.text");
+        TextBox.Watermark = Localization.T("lessons.textPlaceholder");
+        SaveButton.Content = Localization.T("lessons.save");
+        DeleteButton.Content = Localization.T("lessons.delete");
+    }
+
     private void OnLessonSelected(object? sender, SelectionChangedEventArgs e)
     {
         _selectedLesson = LessonsList.SelectedItem as Lesson;
@@ -66,19 +81,19 @@ public partial class LessonsPage : UserControl
 
         if (string.IsNullOrWhiteSpace(title))
         {
-            ErrorText.Text = "Введіть назву уроку.";
+            ErrorText.Text = Localization.T("lessons.errEmptyTitle");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(text) || text.Length < 5)
         {
-            ErrorText.Text = "Текст уроку має містити щонайменше 5 символів.";
+            ErrorText.Text = Localization.T("lessons.errShortText");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(difficulty))
         {
-            ErrorText.Text = "Оберіть складність.";
+            ErrorText.Text = Localization.T("lessons.errDifficulty");
             return;
         }
 
@@ -105,7 +120,7 @@ public partial class LessonsPage : UserControl
         }
 
         SaveAll();
-        ErrorText.Text = "Збережено";
+        ErrorText.Text = Localization.T("lessons.saved");
     }
 
     // Кнопка "Видалити"

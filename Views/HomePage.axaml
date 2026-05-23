@@ -6,31 +6,29 @@
   <ScrollViewer>
     <StackPanel Margin="10" Spacing="20">
 
-      <!-- Привітання -->
-      <TextBlock Text="Головна" FontSize="28" FontWeight="Bold"/>
-      <TextBlock Text="Ласкаво просимо до Touch Typing Tutor!"
-                 FontSize="16" Foreground="Gray"/>
+      <TextBlock x:Name="TitleText" FontSize="28" FontWeight="Bold"/>
+      <TextBlock x:Name="WelcomeText" FontSize="16" Foreground="Gray"/>
 
       <!-- Загальна статистика -->
       <Border BorderBrush="#E0E0E8" BorderThickness="1"
               CornerRadius="6" Padding="15">
         <Grid ColumnDefinitions="*,*,*">
           <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-            <TextBlock Text="Тренувань" FontSize="12" Foreground="Gray"
+            <TextBlock x:Name="TotalCaption" FontSize="12" Foreground="Gray"
                        HorizontalAlignment="Center"/>
             <TextBlock x:Name="TotalLabel" Text="0"
                        FontSize="26" FontWeight="Bold"
                        HorizontalAlignment="Center"/>
           </StackPanel>
           <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-            <TextBlock Text="Середня швидкість (WPM)" FontSize="12" Foreground="Gray"
+            <TextBlock x:Name="AvgWpmCaption" FontSize="12" Foreground="Gray"
                        HorizontalAlignment="Center"/>
             <TextBlock x:Name="AvgWpmLabel" Text="—"
                        FontSize="26" FontWeight="Bold"
                        HorizontalAlignment="Center"/>
           </StackPanel>
           <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-            <TextBlock Text="Середня точність" FontSize="12" Foreground="Gray"
+            <TextBlock x:Name="AvgAccCaption" FontSize="12" Foreground="Gray"
                        HorizontalAlignment="Center"/>
             <TextBlock x:Name="AvgAccLabel" Text="—"
                        FontSize="26" FontWeight="Bold"
@@ -39,18 +37,14 @@
         </Grid>
       </Border>
 
-      <!-- Графік прогресу -->
-      <TextBlock Text="Прогрес за останні 10 тренувань (WPM)"
-                 FontSize="16" FontWeight="SemiBold"/>
+      <TextBlock x:Name="ChartTitleText" FontSize="16" FontWeight="SemiBold"/>
       <Border BorderBrush="#E0E0E8" BorderThickness="1"
               CornerRadius="6" Padding="15"
               Height="220">
         <Canvas x:Name="ChartCanvas" Background="Transparent"/>
       </Border>
 
-      <!-- Останні результати -->
-      <TextBlock Text="Останні результати"
-                 FontSize="16" FontWeight="SemiBold"/>
+      <TextBlock x:Name="RecentTitleText" FontSize="16" FontWeight="SemiBold"/>
       <Border BorderBrush="#E0E0E8" BorderThickness="1"
               CornerRadius="6" Padding="10">
         <ItemsControl x:Name="RecentList">
@@ -82,7 +76,6 @@
       </Border>
 
       <TextBlock x:Name="EmptyText"
-                 Text="Поки що немає тренувань. Перейдіть на вкладку «Тренування» і почніть!"
                  Foreground="Gray" FontStyle="Italic"
                  IsVisible="False"/>
 

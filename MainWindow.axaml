@@ -3,29 +3,30 @@
         x:Class="TouchTypingTutor.MainWindow"
         Title="Touch Typing Tutor"
         Width="900" Height="600"
-        MinWidth="700" MinHeight="500"
-        RequestedThemeVariant="Light">
+        MinWidth="700" MinHeight="500">
 
     <Grid ColumnDefinitions="200,*">
 
-        <Border Grid.Column="0" Background="{StaticResource SidebarBrush}">
+        <Border Grid.Column="0" Background="{DynamicResource SidebarBrush}">
             <StackPanel Margin="10">
+                <TextBlock Text="Головнич Вікторія КН-21"
+                           FontSize="13"
+                           Margin="8,15,5,0"
+                           Opacity="0.7"
+                           TextDecorations="Underline"/>
+
                 <TextBlock Text="Touch Typing"
                            FontSize="18" FontWeight="Bold"
-                           Margin="8,15,5,5"/>
+                           Margin="8,10,5,5"/>
                 <TextBlock Text="Tutor"
                            FontSize="18" FontWeight="Bold"
                            Margin="8,0,5,25"
-                           Foreground="{StaticResource AccentBrush}"/>
+                           Foreground="{DynamicResource AccentBrush}"/>
 
-                <Button x:Name="HomeButton" Content="Головна"
-                        Classes="nav" Click="OnHomeClick"/>
-                <Button x:Name="LessonsButton" Content="Уроки"
-                        Classes="nav" Click="OnLessonsClick"/>
-                <Button x:Name="TypingButton" Content="Тренування"
-                        Classes="nav" Click="OnTypingClick"/>
-                <Button x:Name="SettingsButton" Content="Налаштування"
-                        Classes="nav" Click="OnSettingsClick"/>
+                <Button x:Name="HomeButton" Classes="nav" Click="OnHomeClick"/>
+                <Button x:Name="LessonsButton" Classes="nav" Click="OnLessonsClick"/>
+                <Button x:Name="TypingButton" Classes="nav" Click="OnTypingClick"/>
+                <Button x:Name="SettingsButton" Classes="nav" Click="OnSettingsClick"/>
             </StackPanel>
         </Border>
 
