@@ -1,0 +1,11 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="TouchTypingTutor.Views.TypingPage">
+
+  <StackPanel Margin="10">
+    <TextBlock Text="Тренування" FontSize="28" FontWeight="Bold"/>
+    <TextBlock Text="Тут буде сам процес тренування друку."
+               Margin="0,15,0,0" FontSize="14" Foreground="Gray"/>
+  </StackPanel>
+
+</UserControl>
