@@ -1,5 +1,7 @@
 bin/
 obj/
+publish/
+build.sh
 *.user
 *.suo
 .vs/

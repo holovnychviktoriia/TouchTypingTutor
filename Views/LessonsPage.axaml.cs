@@ -34,10 +34,10 @@ public partial class LessonsPage : UserControl
         TitleText.Text = Localization.T("lessons.title");
         AddButton.Content = Localization.T("lessons.add");
         NameLabel.Text = Localization.T("lessons.name");
-        TitleBox.Watermark = Localization.T("lessons.namePlaceholder");
+        TitleBox.PlaceholderText = Localization.T("lessons.namePlaceholder");
         DifficultyLabel.Text = Localization.T("lessons.difficulty");
         TextLabel.Text = Localization.T("lessons.text");
-        TextBox.Watermark = Localization.T("lessons.textPlaceholder");
+        TextBox.PlaceholderText = Localization.T("lessons.textPlaceholder");
         SaveButton.Content = Localization.T("lessons.save");
         DeleteButton.Content = Localization.T("lessons.delete");
     }

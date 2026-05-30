@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="TouchTypingTutor.MainWindow"
+        Icon="/Resources/icon.ico"
         Title="Touch Typing Tutor"
         Width="900" Height="600"
         MinWidth="700" MinHeight="500">
